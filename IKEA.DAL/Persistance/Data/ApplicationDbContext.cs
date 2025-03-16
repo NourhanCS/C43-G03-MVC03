@@ -1,5 +1,6 @@
 ﻿using IKEA.DAL.Models.Departments;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,15 @@ namespace IKEA.DAL.Persistance.Data
 {
     public class ApplicationDbContext:DbContext
     {
+        //Dependancy Injection
+
+        //Department => Context => Options
+        //Ask CLR Generate Options for My Context
+        public ApplicationDbContext(DbContextOptions options):base(options)
+        {
+         
+        }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
