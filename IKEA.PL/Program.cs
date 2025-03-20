@@ -1,3 +1,4 @@
+using IKEA.BLL.Services.DepartmentServices;
 using IKEA.DAL.Persistance.Data;
 using IKEA.DAL.Persistance.Repositories.Departments;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ namespace IKEA.PL
 
             // Add services to the container.
             #region Configure Services 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews();//Object => Department => Srvices =>Repository => Context
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
 
@@ -21,7 +22,8 @@ namespace IKEA.PL
 
             });
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            
+            builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
+           
             #endregion
 
 
