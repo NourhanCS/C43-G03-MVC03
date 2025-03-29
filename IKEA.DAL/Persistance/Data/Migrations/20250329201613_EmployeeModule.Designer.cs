@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IKEA.DAL.Persistance.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250329181626_EmployeeModule")]
+    [Migration("20250329201613_EmployeeModule")]
     partial class EmployeeModule
     {
         /// <inheritdoc />
