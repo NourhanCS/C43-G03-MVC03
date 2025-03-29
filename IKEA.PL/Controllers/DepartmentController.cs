@@ -1,6 +1,9 @@
 ﻿using IKEA.BLL.DTO_S.Departments;
 using IKEA.BLL.Services.DepartmentServices;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Identity.Client;
+using System.Data;
 
 namespace IKEA.PL.Controllers
 {
@@ -140,6 +143,45 @@ namespace IKEA.PL.Controllers
 
             ModelState.AddModelError(string.Empty, Message);
             return View(departmentDto);
+        }
+            #endregion
+
+            #region Delete
+            [HttpGet]
+            public IActionResult Delete (int? id) 
+            {
+             if (id is null) 
+                    return BadRequest();
+
+                var Department = departmentServices.GetDepartmentById(id.Value);
+
+                if(Department is null)
+                    return NotFound();
+
+                return View(Department);
+            }
+        [HttpPost]
+        public IActionResult Delete(int Deptid)
+        {
+            var Message = string.Empty;
+            try
+            {
+                var IsDeleted = departmentServices.DeleteDepartment(Deptid);
+                if (IsDeleted)
+                    return RedirectToAction(nameof(Index));
+
+                Message = "Department Is Not Deleted";
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, ex.Message);
+
+                Message = environment.IsDevelopment() ? ex.Message : "An Error Has Been Occured during deleted the Department!";
+            }
+            ModelState.AddModelError(string.Empty, Message);
+            return RedirectToAction(nameof(Delete), new {id=Deptid});
+
+        }
 
             #endregion
 
@@ -152,4 +194,5 @@ namespace IKEA.PL.Controllers
 
         }
     }
-}
+
+

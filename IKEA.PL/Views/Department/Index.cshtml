@@ -47,12 +47,44 @@
 
 
                     <td>
-                        <a asp-controller="Department" asp-action="Delete" asp-route-id="@dept.Id" class="btn btn-danger">
+                     @*  <a asp-controller="Department" asp-action="Delete" asp-route-id="@dept.Id" class="btn btn-danger">
                             <i i class="fas fa-trash"></i>   Delete
-                        </a>
+                        </a> *@
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteDepartment">
+                            <i i class="fas fa-trash"></i>   Delete
+                        </button>
+
+                   
                     </td>
 
                 </tr>
+                <div class="modal fade" id="DeleteDepartment" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Department</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h4 class="modal-title fs-5" id="exampleModalLabel">Are You Sure To Delete @dept.Name Department?</h4>
+
+                            </div>
+                            <div class="modal-footer">
+                                <form asp-action="Delete" asp-route-Deptid="@dept.Id" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="mt-4">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <input type="submit" value="Delete" class="btn btn-danger" />
+                                       
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+
             }
         </tbody>
     </table>
