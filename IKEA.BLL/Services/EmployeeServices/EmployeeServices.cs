@@ -22,14 +22,14 @@ namespace IKEA.BLL.Services.EmployeeServices
         {
           return repository.GetAll().Where(E => E.IsDeleted == false).Select(E => new EmployeeDto()
           {
-              Id= E.Id,
-              Name= E.Name,
-              Age= E.Age,
-              Salary= E.Salary,
-              IsActive= E.IsActive,
+              Id = E.Id,
+              Name = E.Name,
+              Age = E.Age,
+              Salary = E.Salary,
+              IsActive = E.IsActive,
               Email= E.Email,
-              Gender=nameof(E.Gender),
-              EmployeeType=nameof(E.EmployeeType)
+              Gender = E.Gender,
+              EmployeeType = E.EmployeeType
           }).ToList();
 
         }

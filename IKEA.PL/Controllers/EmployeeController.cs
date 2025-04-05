@@ -20,9 +20,12 @@ namespace IKEA.PL.Controllers
         #endregion
 
         #region Index 
+
+        [HttpGet]   
         public ActionResult Index()
         {
-            return View();
+            var Employees = employeeServices.GetAllEmployees();
+            return View(Employees);
         }
 
         #endregion
