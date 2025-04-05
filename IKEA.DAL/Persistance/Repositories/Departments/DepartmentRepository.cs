@@ -1,5 +1,6 @@
 ﻿using IKEA.DAL.Models.Departments;
 using IKEA.DAL.Persistance.Data;
+using IKEA.DAL.Persistance.Repositories._Generic;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,52 +10,16 @@ using System.Threading.Tasks;
 
 namespace IKEA.DAL.Persistance.Repositories.Departments
 {
-    public class DepartmentRepository : IDepartmentRepository
+    public class DepartmentRepository:GenericRepository<Department>,IDepartmentRepository
     {//Repository => Context => Options
+
         private readonly ApplicationDbContext dbContext;
 
-        public DepartmentRepository(ApplicationDbContext context) //Ask CLR for Generating Object Of Context
+        public DepartmentRepository(ApplicationDbContext context):base(context) //Ask CLR for Generating Object Of Context
         {
-           dbContext = context;
+            dbContext = context;
 
         }
 
-        public IEnumerable<Department> GetAll(bool WithNoTracking=true)
-        {
-            if (WithNoTracking)
-                return dbContext.Departments.AsNoTracking().ToList();
-
-            return dbContext.Departments.ToList();
-        }
-
-        public Department? GetById(int id)
-        {
-            var Department = dbContext.Departments.Find(id);
-
-            //var Department= dbContext.Departments.Local.SingleOrDefault(D=>D.Id==id);
-
-            //if (Department is null)
-            //    Department = dbContext.Departments.FirstOrDefault(D => D.Id == id);
-                
-            return Department;
-        }
-        public int Add(Department department)
-        {
-            dbContext.Departments.Add(department);
-            return dbContext.SaveChanges();
-        }
-        public int Update(Department department)
-        {
-            dbContext.Departments.Update(department);
-            return dbContext.SaveChanges();
-        }
-
-        public int Delete(Department department)
-        {
-            dbContext.Departments.Remove(department);
-            return dbContext.SaveChanges();
-        }
-
-       
     }
 }
