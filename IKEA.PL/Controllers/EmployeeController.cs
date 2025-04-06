@@ -33,7 +33,6 @@ namespace IKEA.PL.Controllers
 
         #endregion
 
-
         #region Details
 
         [HttpGet]
@@ -88,6 +87,63 @@ namespace IKEA.PL.Controllers
             }
             ModelState.AddModelError(string.Empty, Message);
             return View(EmployeeDto);
+        }
+        #endregion
+
+        #region Update
+        [HttpGet]
+        public IActionResult Edit(int? id)
+
+        {
+            if (id is null)
+                return BadRequest();
+
+            var Employee = employeeServices.GetEmployeeById(id.Value);
+            if (Employee is null)
+                return NotFound();
+
+            var MappedEmployee = new UpdatedEmployeeDto()
+            {
+                Id = Employee.Id,
+                Name = Employee.Name,
+                Age = Employee.Age,
+               Address = Employee.Address,
+              HiringDate  = Employee.HiringDate,
+              Email = Employee.Email,
+              PhoneNumber = Employee.PhoneNumber,
+              Salary = Employee.Salary, 
+              Gender = Employee.Gender,
+              EmployeeType = Employee.EmployeeType,
+              IsActive = Employee.IsActive,
+            };
+
+            return View(MappedEmployee);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(UpdatedEmployeeDto employeeDto)
+        {
+            if (!ModelState.IsValid)
+                return View(employeeDto);
+            var Message = String.Empty;
+            try
+            {
+                var Result = employeeServices.UpdateEmployee(employeeDto);
+                if (Result > 0)
+                    return RedirectToAction(nameof(Index));
+                else
+                    Message = "Employee Is Not Updated";
+            }
+
+            catch (Exception ex)
+            {
+                logger.LogError(ex, ex.Message);
+
+                Message = environment.IsDevelopment() ? ex.Message : "An Error Has Been Occured during Update the Employee !";
+            }
+
+            ModelState.AddModelError(string.Empty, Message);
+            return View(employeeDto);
         }
         #endregion
 
