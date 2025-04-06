@@ -146,7 +146,7 @@ namespace IKEA.PL.Controllers
         }
             #endregion
 
-            #region Delete
+        #region Delete
             [HttpGet]
             public IActionResult Delete (int? id) 
             {

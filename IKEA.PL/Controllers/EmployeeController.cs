@@ -147,6 +147,46 @@ namespace IKEA.PL.Controllers
         }
         #endregion
 
+        #region Delete
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            if (id is null)
+                return BadRequest();
+
+            var Employee = employeeServices.GetEmployeeById(id.Value);
+
+            if (Employee is null)
+                return NotFound();
+
+            return View(Employee);
+        }
+        [HttpPost]
+        public IActionResult Delete(int Empid)
+        {
+            var Message = string.Empty;
+            try
+            {
+                var IsDeleted = employeeServices.DeleteEmployee(Empid);
+                if (IsDeleted)
+                    return RedirectToAction(nameof(Index));
+
+                Message = "Employee Is Not Deleted";
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, ex.Message);
+
+                Message = environment.IsDevelopment() ? ex.Message : "An Error Has Been Occured during deleted The Employee !";
+            }
+            ModelState.AddModelError(string.Empty, Message);
+            return RedirectToAction(nameof(Delete), new { id = Empid });
+
+        }
+
+        #endregion
+
+
 
 
     }
