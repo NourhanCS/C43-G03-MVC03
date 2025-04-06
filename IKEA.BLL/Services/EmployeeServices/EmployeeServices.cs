@@ -20,17 +20,21 @@ namespace IKEA.BLL.Services.EmployeeServices
 
         public IEnumerable<EmployeeDto> GetAllEmployees()
         {
-          return repository.GetAll().Where(E => E.IsDeleted == false).Select(E => new EmployeeDto()
-          {
-              Id = E.Id,
-              Name = E.Name,
-              Age = E.Age,
-              Salary = E.Salary,
-              IsActive = E.IsActive,
-              Email= E.Email,
-              Gender = E.Gender,
-              EmployeeType = E.EmployeeType
-          }).ToList();
+            var Employee = repository.GetAll();
+
+            var FilteredEmployees = Employee.Where(E => E.IsDeleted == false)
+                var AfterFilteration=FilteredEmployees.Select(E => new EmployeeDto()
+            {
+                Id = E.Id,
+                Name = E.Name,
+                Age = E.Age,
+                Salary = E.Salary,
+                IsActive = E.IsActive,
+                Email = E.Email,
+                Gender = E.Gender,
+                EmployeeType = E.EmployeeType
+            });
+            return AfterFilteration.ToList();
 
         }
 
