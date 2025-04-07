@@ -61,7 +61,8 @@ namespace IKEA.PL.Controllers
 
         public IActionResult Create(CreatedEmployeeDto EmployeeDto)
         {
-            if (!ModelState.IsValid)
+            // ServerSide Validation
+            if (!ModelState.IsValid) // false => BadRequest
                 return View(EmployeeDto);
 
             var Message = string.Empty;
