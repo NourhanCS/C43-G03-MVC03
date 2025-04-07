@@ -22,7 +22,7 @@ namespace IKEA.BLL.Services.EmployeeServices
         {
             var Employee = repository.GetAll();
 
-            var FilteredEmployees = Employee.Where(E => E.IsDeleted == false)
+            var FilteredEmployees = Employee.Where(E => E.IsDeleted == false);
                 var AfterFilteration=FilteredEmployees.Select(E => new EmployeeDto()
             {
                 Id = E.Id,
