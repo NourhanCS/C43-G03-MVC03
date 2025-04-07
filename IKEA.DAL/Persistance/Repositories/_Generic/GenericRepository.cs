@@ -20,12 +20,12 @@ namespace IKEA.DAL.Persistance.Repositories._Generic
 
         }
 
-        public IEnumerable<T> GetAll(bool WithNoTracking = true)
-        {
+        public IQueryable<T> GetAll(bool WithNoTracking = true)
+        {// In-Memory Collection
             if (WithNoTracking)
-                return dbContext.Set<T>().Where(E => E.IsDeleted == false).AsNoTracking().ToList();
+                return dbContext.Set<T>().AsNoTracking();
 
-            return dbContext.Set<T>().Where(E => E.IsDeleted == false).ToList();
+            return dbContext.Set<T>();
         }
 
         public T? GetById(int id)
