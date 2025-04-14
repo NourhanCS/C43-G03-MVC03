@@ -1,23 +1,5 @@
 ﻿@model EmployeeDetailsDto
-@{
-    ViewData["Title"] = " Employee Details";
-}
-
-@* <h1>Employee @Model.Name Details</h1>
-
-<br />
-<br /> *@
-
-<h1> @Model.Name Employee  Details</h1>
-
-<Partial name="Partials/_DeleteDetailsPartial"model="Model"/>
-    <div class="mt-4">
-        <a asp-action="Index" class="btn btn-secondary">Back To list</a>
-    </div>
-
-
-<!-- Bootstrap Tabs -->
-@* <ul class="nav nav-tabs" id="employeeTabs" role="tablist">
+<ul class="nav nav-tabs" id="employeeTabs" role="tablist">
     <li class="nav-item" role="presentation">
         <a class="nav-link active" id="general-tab" data-bs-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
     </li>
@@ -114,11 +96,13 @@
         </div>
     </div>
 
-    <div class="mt-4">
-        <a asp-action="Index" class="btn btn-secondary">Back To list</a>
-    </div>
+   @*  <form asp-action="Delete" asp-route-EmpId="@Model.Id" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="mt-4">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-secondary">Back To list</a>
+        </div>
+    </form> *@
 
 </div>
 
-
- *@
