@@ -4,14 +4,25 @@
 }
 
 <h1>Are you sure to Delete Employee: @Model.Name?</h1>
+<Partial name="Partials/_DeleteDetailsPartial" model="Model" />
 
-<br />
-<br />
+
+@* <br />
+<br /> *@
 
 
 
 <!-- Bootstrap Tabs -->
-<ul class="nav nav-tabs" id="employeeTabs" role="tablist">
+<form asp-action="Delete" asp-route-EmpId="@Model.Id" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mt-4">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Back To list</a>
+    </div>
+</form>
+
+
+@* <ul class="nav nav-tabs" id="employeeTabs" role="tablist">
     <li class="nav-item" role="presentation">
         <a class="nav-link active" id="general-tab" data-bs-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
     </li>
@@ -117,4 +128,4 @@
     </form>
 
 </div>
-
+ *@
