@@ -19,11 +19,11 @@ namespace IKEA.BLL.Services.EmployeeServices
             repository = employeerepository;
         }
 
-        public IEnumerable<EmployeeDto> GetAllEmployees()
+        public IEnumerable<EmployeeDto> GetAllEmployees(string search)
         {
             var Employee = repository.GetAll();
 
-            var FilteredEmployees = Employee.Where(E => E.IsDeleted == false);
+            var FilteredEmployees = Employee.Where(E => E.IsDeleted == false && (string.IsNullOrEmpty(search) || E.Name.ToLower().Contains(search.ToLower())));
                 var AfterFilteration=FilteredEmployees.Include(E=>E.Department).Select(E => new EmployeeDto()
             {
                 Id = E.Id,
