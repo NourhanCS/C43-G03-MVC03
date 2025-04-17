@@ -1,6 +1,7 @@
 ﻿using IKEA.BLL.DTO_S.Employees;
 using IKEA.DAL.Models.Employees;
 using IKEA.DAL.Persistance.Repositories.Employees;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace IKEA.BLL.Services.EmployeeServices
             var Employee = repository.GetAll();
 
             var FilteredEmployees = Employee.Where(E => E.IsDeleted == false);
-                var AfterFilteration=FilteredEmployees.Select(E => new EmployeeDto()
+                var AfterFilteration=FilteredEmployees.Include(E=>E.Department).Select(E => new EmployeeDto()
             {
                 Id = E.Id,
                 Name = E.Name,
@@ -32,7 +33,8 @@ namespace IKEA.BLL.Services.EmployeeServices
                 IsActive = E.IsActive,
                 Email = E.Email,
                 Gender = E.Gender,
-                EmployeeType = E.EmployeeType
+                EmployeeType = E.EmployeeType,
+                Department = E.Department.Name ?? "N/A" 
             });
             return AfterFilteration.ToList();
 
@@ -40,8 +42,9 @@ namespace IKEA.BLL.Services.EmployeeServices
 
         public EmployeeDetailsDto? GetEmployeeById(int id)
         {
-           var employee = repository.GetById(id);
-            if(employee is not null)
+            var employee = repository.GetById(id);
+
+            if (employee is not null)
             {
                 return new EmployeeDetailsDto()
                 {
@@ -59,7 +62,8 @@ namespace IKEA.BLL.Services.EmployeeServices
                     LastModifiedBy = employee.LastModifiedBy,
                     LastModifiedOn = employee.LastModifiedOn,
                     CreatedBy = employee.CreatedBy,
-                    CreatedOn = employee.CreatedOn
+                    CreatedOn = employee.CreatedOn,
+                    Department = employee.Department?.Name ?? "N/A"
                 };
             }
 
@@ -68,7 +72,7 @@ namespace IKEA.BLL.Services.EmployeeServices
 
         public int CreateEmployee(CreatedEmployeeDto employeeDto)
         {
-            var Employee = new Employee()
+            var Employee = new Employeee()
             {
                 Name = employeeDto.Name,
                 Age = employeeDto.Age,
@@ -80,6 +84,7 @@ namespace IKEA.BLL.Services.EmployeeServices
                 HiringDate = employeeDto.HiringDate,
                 Gender = employeeDto.Gender,
                 EmployeeType = employeeDto.EmployeeType,
+                DepartmentId = employeeDto.DepartmentId,
                 CreatedBy = 1,
                 CreatedOn = DateTime.Now,
                 LastModifiedBy= 1,
@@ -90,7 +95,7 @@ namespace IKEA.BLL.Services.EmployeeServices
 
         public int UpdateEmployee(UpdatedEmployeeDto employeeDto)
         {
-            var Employee = new Employee()
+            var Employee = new Employeee()
             {
                 Id = employeeDto.Id,
                 Name = employeeDto.Name,
@@ -103,6 +108,7 @@ namespace IKEA.BLL.Services.EmployeeServices
                 HiringDate = employeeDto.HiringDate,
                 Gender = employeeDto.Gender,
                 EmployeeType = employeeDto.EmployeeType,
+                DepartmentId = employeeDto.DepartmentId,
                 LastModifiedBy = 1,
                 LastModifiedOn = DateTime.Now
             };

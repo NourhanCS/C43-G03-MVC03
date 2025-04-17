@@ -25,6 +25,8 @@ namespace IKEA.PL.ViewModel
 
         public EmployeeType EmployeeType { get; set; }
 
+        public int? DepartmentId { get; set; }
+
 
     }
 }
