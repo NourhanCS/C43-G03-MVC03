@@ -29,7 +29,7 @@ namespace IKEA.DAL.Persistance.Data
         }
         public DbSet<Department> Departments { get; set; }
 
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Employeee> Employees { get; set; }
 
         
 

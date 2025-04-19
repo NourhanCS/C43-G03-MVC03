@@ -12,12 +12,14 @@ namespace IKEA.PL.Controllers
     {
         #region Services - DI
         private readonly IEmployeeServices employeeServices;
+       // private readonly IDepartmentServices departmentServices;
         private readonly ILogger<EmployeeController> logger;
         private readonly IWebHostEnvironment environment;
 
-        public EmployeeController(IEmployeeServices employeeServices, ILogger<EmployeeController> logger, IWebHostEnvironment environment)
+        public EmployeeController(IEmployeeServices employeeServices,IDepartmentServices departmentServices ,ILogger<EmployeeController> logger, IWebHostEnvironment environment)
         {
             this.employeeServices = employeeServices;
+           // this.departmentServices = departmentServices;
             this.logger = logger;
             this.environment = environment;
         }
@@ -27,9 +29,10 @@ namespace IKEA.PL.Controllers
         #region Index 
 
         [HttpGet]   
-        public ActionResult Index()
+        public IActionResult Index(string search)
         {
-            var Employees = employeeServices.GetAllEmployees();
+
+            var Employees = employeeServices.GetAllEmployees(search);
             return View(Employees);
         }
 
@@ -55,6 +58,7 @@ namespace IKEA.PL.Controllers
 
         public IActionResult Create()
         {
+          //  ViewData["Departments"] = departmentServices.GetAllDepartments();
             return View();
 
         }
@@ -135,6 +139,8 @@ namespace IKEA.PL.Controllers
               IsActive = Employee.IsActive,
             };
 
+           // ViewData["Departments"] = departmentServices.GetAllDepartments();
+
             return View(MappedEmployee);
         }
 
@@ -176,7 +182,7 @@ namespace IKEA.PL.Controllers
 
                 Message = environment.IsDevelopment() ? ex.Message : "An Error Has Been Occured during Update the Employee !";
             }
-
+          //  ViewData["Departments"] = departmentServices.GetAllDepartments();
             ModelState.AddModelError(string.Empty, Message);
             return View(employeeVM);
         }

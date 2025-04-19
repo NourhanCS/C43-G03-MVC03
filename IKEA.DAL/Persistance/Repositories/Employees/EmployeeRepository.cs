@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace IKEA.DAL.Persistance.Repositories.Employees
 {
-    public class EmployeeRepository :GenericRepository<Employee> ,IEmployeeRepository
+    public class EmployeeRepository :GenericRepository<Employeee> ,IEmployeeRepository
     {//Repository => Context => Options
 
         private readonly ApplicationDbContext dbContext;
