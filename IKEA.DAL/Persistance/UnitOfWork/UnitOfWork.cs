@@ -13,8 +13,8 @@ namespace IKEA.DAL.Persistance.UnitOfWork
     {
         private readonly ApplicationDbContext dbContext;
 
-        public IDepartmentRepository DepartmentRepository { get ; set  ; }
-        public IEmployeeRepository EmployeeRepository { get  ; set  ; }
+        public IDepartmentRepository DepartmentRepository { get ; }
+        public IEmployeeRepository EmployeeRepository { get ; }
 
         public UnitOfWork(ApplicationDbContext dbContext)   //Ask CLR To Generate Object from Context
         {
@@ -27,8 +27,8 @@ namespace IKEA.DAL.Persistance.UnitOfWork
         }
 
         public int Complete()
-        {
-            throw new NotImplementedException();
+        {]\
+         return dbContext.SaveChanges();
         }
     }
 }

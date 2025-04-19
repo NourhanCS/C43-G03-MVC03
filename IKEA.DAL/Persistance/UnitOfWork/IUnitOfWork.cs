@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace IKEA.DAL.Persistance.UnitOfWork
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        public IDepartmentRepository DepartmentRepository { get; set; }
+        public IDepartmentRepository DepartmentRepository { get; }
 
-        public IEmployeeRepository EmployeeRepository { get; set; }
+        public IEmployeeRepository EmployeeRepository { get;  }
 
         int Complete();
 
