@@ -27,8 +27,10 @@ namespace IKEA.DAL.Persistance.UnitOfWork
         }
 
         public int Complete()
-        {]\
-         return dbContext.SaveChanges();
+        {
+           
+          return dbContext.SaveChanges();
+            }
         }
     }
-}
+
