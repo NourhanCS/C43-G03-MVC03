@@ -137,6 +137,7 @@ namespace IKEA.PL.Controllers
               Gender = Employee.Gender,
               EmployeeType = Employee.EmployeeType,
               IsActive = Employee.IsActive,
+              ImageName = Employee.ImageName,
             };
 
            // ViewData["Departments"] = departmentServices.GetAllDepartments();
