@@ -14,7 +14,7 @@ namespace IKEA.DAL.Persistance.UnitOfWork
 
         public IEmployeeRepository EmployeeRepository { get;  }
 
-        int Complete();
+     public Task <int> Complete();
 
 
     }
