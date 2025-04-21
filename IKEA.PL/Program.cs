@@ -56,6 +56,8 @@ namespace IKEA.PL
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthorization();
             app.UseAuthorization();
 
           
