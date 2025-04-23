@@ -104,5 +104,14 @@ namespace IKEA.PL.Controllers
 
         #endregion
 
+
+        #region SignOut
+        public async Task<IActionResult> SignOut()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction(nameof(LogIn));
+        }
+        #endregion
+
     }
 }
