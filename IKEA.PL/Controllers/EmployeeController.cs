@@ -3,12 +3,14 @@ using IKEA.BLL.DTO_S.Employees;
 using IKEA.BLL.Services.DepartmentServices;
 using IKEA.BLL.Services.EmployeeServices;
 using IKEA.PL.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace IKEA.PL.Controllers
 {
+        [Authorize]
     public class EmployeeController : Controller
     {
         #region Services - DI
@@ -28,7 +30,6 @@ namespace IKEA.PL.Controllers
         #endregion
 
         #region Index 
-
         [HttpGet]   
         public async Task<IActionResult> Index(string search)
         {
@@ -40,7 +41,6 @@ namespace IKEA.PL.Controllers
         #endregion
 
         #region Details
-
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
@@ -115,7 +115,7 @@ namespace IKEA.PL.Controllers
 
         #region Update
         [HttpGet]
-        public  async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
 
         {
             if (id is null)

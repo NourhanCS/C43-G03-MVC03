@@ -2,6 +2,7 @@
 using IKEA.BLL.DTO_S.Departments;
 using IKEA.BLL.Services.DepartmentServices;
 using IKEA.PL.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Identity.Client;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace IKEA.PL.Controllers
 {
+    [Authorize]
     public class DepartmentController : Controller
     {//Services => Departments
 

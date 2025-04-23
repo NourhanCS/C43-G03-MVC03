@@ -1,32 +1,31 @@
 ﻿@model LogInViewModel
 @{
     ViewData["Title"] = "LogIn";
-    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+     Layout = "~/Views/Shared/_AuthLayout.cshtml";
+
 }
 
-<form class="form login-form active">
-    <h2>Welcome Back!</h2>
+<form asp-controller="Account" asp-action="LogIn" method="post">
+    @Html.AntiForgeryToken()
+
+    <h2>Welcome Back!</h2> 
     <p>Login to your account to continue</p>
+    
+
     <div class="input-group">
-        <input type="email" placeholder="Email" required>
+        <input asp-for="Email" class="form-control" placeholder="Email" />
         <span class="input-icon">📧</span>
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="input-group">
-        <input type="password" placeholder="Password" required>
+        <input asp-for="Password" class="form-control" placeholder="Password" type="password" />
         <span class="input-icon">🔒</span>
+        <span asp-validation-for="Password" class="text-danger"></span>
     </div>
 
-    <div class=" wthree-text">
-        <label class="anim">
-            <input type="checkbox" class="checkbox" asp-for="RememberMe" required="" />
-            <span>Remember Me</span>
-        </label>
-        <div class="clear"></div>
-    </div>
+     <button type="submit" class="btn">Login</button>
 
-    <button type="submit" class="btn">Login</button>
     <p class="switch-text">
-        Don’t have an account? <a href="/Account/SignUp" class="toggle-form">Sign Up</a> @* <span class="toggle-form">Sign Up</span>
-    </p> *@
-</form>
-
+        Don’t have an account? <a href="/Account/SignUp" class="toggle-form">Sign Up</a>  @* <span class="toggle-form">Sign Up</span> </p> *@
+ </form>
+ 

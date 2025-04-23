@@ -20,6 +20,6 @@ namespace IKEA.PL.ViewModel.Identity
         [DataType(DataType.Password)]
 
         [Display(Name ="Is Agree")]
-        public string IsAgree { get; set; }
+        public bool IsAgree { get; set; }
     }
 }
