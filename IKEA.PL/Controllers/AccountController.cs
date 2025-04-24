@@ -139,7 +139,7 @@ namespace IKEA.PL.Controllers
                     {
                         Subject = "Reset Password",
                         To = user.Email,
-                        Body = "ResetPassswordLink"
+                        Body = $"Click the link below to reset your password:\n{PasswordResetLink} "
                     };
                     EmailSettings.SendEmail(email);
                     return RedirectToAction(nameof(CheckYourInbox));
@@ -153,9 +153,31 @@ namespace IKEA.PL.Controllers
             return View();
         }
 
-        public IActionResult ResetPassword()
+        public IActionResult ResetPassword(string email,string token)
         {
+            TempData["email"] = email; 
+            TempData["token"] = token;
             return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string email = TempData["email"] as string;
+                string token = TempData["token"] as string;
+                var user = await userManager.FindByEmailAsync(email);
+                var result = await userManager.ResetPasswordAsync(user,token,model.NewPassword);
+
+                if (result.Succeeded)
+            return RedirectToAction(nameof(LogIn));
+
+                foreach (var error in result.Errors)
+                    ModelState.AddModelError(string.Empty, error.Description);
+            }
+           
+            return View(model);
         }
         #endregion
 

@@ -10,8 +10,8 @@ namespace IKEA.PL.Helpers
         {
             var Client = new SmtpClient("smtp.gmail.com", 587);
             Client.EnableSsl = true;
-            Client.Credentials = new NetworkCredential("norhanmohmoud.2004@gmail.com","lbanwqtxuevpexgh"); //APP Password
-            Client.Send("norhanmohmoud.2004@gmail.com", email.To, email.Subject, email.Body);
+            Client.Credentials = new NetworkCredential("mahmoudnourhan216@gmail.com", "aobwrotdcvgmryez"); //APP Password
+            Client.Send("mahmoudnourhan216@gmail.com", email.To, email.Subject, email.Body);
 
         }
     }

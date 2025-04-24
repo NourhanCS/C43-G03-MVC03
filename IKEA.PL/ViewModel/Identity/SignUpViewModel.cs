@@ -13,13 +13,13 @@ namespace IKEA.PL.ViewModel.Identity
         [Required(ErrorMessage ="Email Is Required")]
         [EmailAddress(ErrorMessage = "Email Is Invalid")]
         public string Email { get; set; } = null!;
+
+        [Required(ErrorMessage = "Password Is Required")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
         [Display(Name = "ConfirmPassword")]
         [Compare("Password",ErrorMessage ="Confirm Password Not Match With Password !!")]
         public string ConfirmPassword { get; set; } = null!;
-
-        [DataType(DataType.Password)]
 
         [Display(Name ="Is Agree")]
         public bool IsAgree { get; set; }
