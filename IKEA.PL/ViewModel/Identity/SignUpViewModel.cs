@@ -9,7 +9,9 @@ namespace IKEA.PL.ViewModel.Identity
         [Display(Name = "Last Name")]
         public string LastName { get; set; } = null!;
         public string UserName { get; set; } = null!;
-        [EmailAddress]
+
+        [Required(ErrorMessage ="Email Is Required")]
+        [EmailAddress(ErrorMessage = "Email Is Invalid")]
         public string Email { get; set; } = null!;
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;

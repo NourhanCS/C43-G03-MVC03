@@ -1,5 +1,7 @@
 ﻿using IKEA.DAL.Models;
 using IKEA.DAL.Models.Identity;
+using IKEA.PL.Helpers;
+using IKEA.PL.ViewModel;
 using IKEA.PL.ViewModel.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -110,6 +112,45 @@ namespace IKEA.PL.Controllers
         {
             await signInManager.SignOutAsync();
             return RedirectToAction(nameof(LogIn));
+        }
+        #endregion
+
+        #region Forget Password
+        //Get
+        public IActionResult ForgetPassword()
+        {
+            return View();
+
+        }
+
+        //Post
+        [HttpPost]
+        public async Task<IActionResult> SendEmail(ForgetPasswordViewModel model)
+        {
+            if (ModelState.IsValid) //Server Side Validation
+            {
+                var user = await userManager.FindByEmailAsync(model.Email);
+                if (user is not null)
+                {
+                    var Token = await userManager.GeneratePasswordResetTokenAsync(user); //Token Valid For One Time 
+                    var PasswordResetLink = Url.Action("ResetPassword", "Account", new { email = user.Email, token = Token },Request.Scheme);
+                    //https:\\localhost:7035\Account\ResetPassword\Nourhan21@gmail.com&token=dvhwgedwuegugygfcsjacjq12356lwdip2edofegwgd
+                    var email = new Email()
+                    {
+                        Subject = "Reset Password",
+                        To = user.Email,
+                        Body = "ResetPassswordLink"
+                    };
+                    EmailSettings.SendEmail(email);
+                    return RedirectToAction(nameof(CheckYourInbox));
+                }
+                ModelState.AddModelError(string.Empty, "Email Is Not Valid");
+            }
+            return View(model);
+        }
+        public IActionResult CheckYourInbox()
+        {
+            return View();
         }
         #endregion
 
