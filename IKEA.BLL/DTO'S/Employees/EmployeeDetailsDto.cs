@@ -30,6 +30,10 @@ namespace IKEA.BLL.DTO_S.Employees
 
         public EmployeeType EmployeeType { get; set; }
 
+        public string? Department { get; set; }
+
+        public string? ImageName { get; set; }
+
         #region Administrator
         public bool IsDeleted { get; set; }  //Soft Delete
         public int CreatedBy { get; set; }

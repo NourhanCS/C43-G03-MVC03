@@ -1,11 +1,14 @@
-﻿@model DepartmentVM
+﻿using IKEA.BLL.DTO_S.Departments;
+using IKEA.BLL.DTO_S.Employees;
+
+@model DepartmentVM
 @{
     ViewData["Title"] = "Create";
 }
 <div class="row justify-content-center align-content-center flex-column">
     <h1 class="col-6 my-4">Create Department</h1>
     <form asp-action="Create" method="post" class="col-6">
-        <div asp-validation-summary="ModelOnly"></div>
+        <div asp-validation-summary="ModelOnly"></div> 
    
         <partial name="Partials/_CreateEditPartial" model="@Model"/>
 

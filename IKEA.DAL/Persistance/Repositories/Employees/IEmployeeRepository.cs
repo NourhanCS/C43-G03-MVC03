@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IKEA.DAL.Persistance.Repositories.Employees
 {
-    public interface IEmployeeRepository:IGenericRepository<Employee>
+    public interface IEmployeeRepository:IGenericRepository<Employeee>
     {
        
     }

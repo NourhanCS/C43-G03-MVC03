@@ -1,0 +1,54 @@
+﻿
+@model SignUpViewModel
+@{
+    ViewData["Title"] = "SignUp";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<form asp-action="SignUp">
+    <h2>Create Account</h2>
+    <p>Sign up to explore new opportunities</p>
+    <div class="input-group">
+        <input type="text" asp-for="FirstName" placeholder="First Name" required>
+        <span class="input-icon">👤</span>
+    </div>
+
+    <div class="input-group">
+        <input type="text" asp-for="LastName" placeholder="Last Name" required>
+        <span class="input-icon">👤</span>
+    </div>
+
+    <div class="input-group">
+        <input type="text" asp-for="UserName" placeholder="UserName" required>
+        <span class="input-icon">👤</span>
+    </div>
+
+    <div class="input-group">
+        <input type="email" asp-for="Email" placeholder="Email" required>
+        <span class="input-icon">📧</span>
+    </div>
+    <div class="input-group">
+        <input type="password" asp-for="Password" placeholder="Password" required>
+        <span class="input-icon">🔒</span>
+    </div>
+
+    <div class="input-group">
+        <input type="password" asp-for="ConfirmPassword" placeholder="Confirm Password" required>
+        <span class="input-icon">🔒</span>
+    </div>
+
+    <div class=" wthree-text">
+        <label class="anim">
+            <input type="checkbox" class="checkbox" asp-for="IsAgree" required="" />
+            <span>I Agree The Terms & Conditions</span>
+            </label>
+            <div class="clear"></div>
+    </div>
+
+        <div asp-validation-summary="All"></div>
+
+    <button type="submit" class="btn">Sign Up</button>
+    <p class="switch-text">
+        Already have an account? <a href="/Account/Login" class="toggle-form">Login</a> @* <span class="toggle-form">Login</span> *@
+    </p>
+</form>

@@ -1,4 +1,21 @@
-﻿@model EmployeeDetailsDto
+﻿
+@model EmployeeDetailsDto
+
+<div class="row">
+    <div class="col-3">
+
+        <img src="~/files/images/@Model.ImageName" class="img-fluid rounded-3 w-100 h-100" /> 
+
+        @* <img src="@Url.Content("~/files/images/" + Model.ImageName)" class="img-fluid rounded-3 w-100 h-100" /> *@
+
+
+
+
+    </div>
+</div>
+
+
+
 <ul class="nav nav-tabs" id="employeeTabs" role="tablist">
     <li class="nav-item" role="presentation">
         <a class="nav-link active" id="general-tab" data-bs-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
@@ -37,6 +54,12 @@
                 <label class="form-label" asp-for="PhoneNumber"></label>
                 <input asp-for="PhoneNumber" class="form-control" readonly />
             </div>
+
+            <div class="form-group col-6 mb-4">
+                <label class="form-label" asp-for="Department"></label>
+                <input asp-for="Department" class="form-control" readonly />
+            </div>
+
             <div class="form-group col-6 mb-4">
                 <label asp-for="EmployeeType" class="control-label mb-2"></label>
                 <select asp-for="EmployeeType" disabled asp-items="Html.GetEnumSelectList<EmployeeType>()" class="form-control">
@@ -72,37 +95,41 @@
 
         </div>
     </div>
+    @if(User.IsInRole("Admin"))
+    {
+        <div class="tab-pane fade p-4 border" id="administration" role="tabpanel" aria-labelledby="administration-tab">
 
-    <!-- Administration Tab Content -->
-    <div class="tab-pane fade p-4 border" id="administration" role="tabpanel" aria-labelledby="administration-tab">
-
-        <div class="row col-12">
-            <div class="form-group  col-6">
-                <label class="col-form-label" asp-for="CreatedBy"></label>
-                <input asp-for="CreatedBy" class="form-control" readonly />
-            </div>
-            <div class="form-group  col-6">
-                <label class="col-form-label" asp-for="CreatedOn"></label>
-                <input asp-for="CreatedOn" class="form-control" readonly />
-            </div>
-            <div class="form-group  col-6">
-                <label class="col-form-label" asp-for="LastModifiedBy"></label>
-                <input asp-for="LastModifiedBy" class="form-control" readonly />
-            </div>
-            <div class="form-group  col-6">
-                <label class="col-form-label" asp-for="LastModifiedOn"></label>
-                <input asp-for="LastModifiedOn" class="form-control" readonly />
+            <div class="row col-12">
+                <div class="form-group  col-6">
+                    <label class="col-form-label" asp-for="CreatedBy"></label>
+                    <input asp-for="CreatedBy" class="form-control" readonly />
+                </div>
+                <div class="form-group  col-6">
+                    <label class="col-form-label" asp-for="CreatedOn"></label>
+                    <input asp-for="CreatedOn" class="form-control" readonly />
+                </div>
+                <div class="form-group  col-6">
+                    <label class="col-form-label" asp-for="LastModifiedBy"></label>
+                    <input asp-for="LastModifiedBy" class="form-control" readonly />
+                </div>
+                <div class="form-group  col-6">
+                    <label class="col-form-label" asp-for="LastModifiedOn"></label>
+                    <input asp-for="LastModifiedOn" class="form-control" readonly />
+                </div>
             </div>
         </div>
-    </div>
+        
+    }
+    <!-- Administration Tab Content -->
 
-   @*  <form asp-action="Delete" asp-route-EmpId="@Model.Id" method="post">
+
+    @* <form asp-action="Delete" asp-route-EmpId="@Model.Id" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="mt-4">
             <input type="submit" value="Delete" class="btn btn-danger" />
             <a asp-action="Index" class="btn btn-secondary">Back To list</a>
         </div>
-    </form> *@
-
+    </form> 
+ *@
 </div>
 

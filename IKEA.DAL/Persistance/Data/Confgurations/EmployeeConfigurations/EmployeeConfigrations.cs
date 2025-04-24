@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace IKEA.DAL.Persistance.Data.Confgurations.EmployeeConfigurations
 {
-    public class EmployeeConfigrations : IEntityTypeConfiguration<Employee>
+    public class EmployeeConfigrations : IEntityTypeConfiguration<Employeee>
     {
-        public void Configure(EntityTypeBuilder<Employee> builder)
+        public void Configure(EntityTypeBuilder<Employeee> builder)
         {
             builder.Property(E => E.Name).HasColumnType("varchar(50)").IsRequired();
             builder.Property(E => E.Address).HasColumnType("varchar(100)");

@@ -1,0 +1,32 @@
+﻿@model LogInViewModel
+@{
+    ViewData["Title"] = "LogIn";
+     Layout = "~/Views/Shared/_AuthLayout.cshtml";
+
+}
+
+<form asp-controller="Account" asp-action="LogIn" method="post">
+    @Html.AntiForgeryToken()
+
+    <h2>Welcome Back!</h2> 
+    <p>Login to your account to continue</p>
+    
+
+    <div class="input-group">
+        <input asp-for="Email" class="form-control" placeholder="Email" />
+        <span class="input-icon">📧</span>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="input-group">
+        <input asp-for="Password" class="form-control" placeholder="Password" type="password" />
+        <span class="input-icon">🔒</span>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+     <button type="submit" class="btn">Login</button>
+
+    <p class="switch-text">
+        Don’t have an account? <a href="/Account/SignUp" class="toggle-form">Sign Up</a>
+       <p><a asp-action="ForgetPassword">Forget Password!</a></p>
+ </form>
+ 

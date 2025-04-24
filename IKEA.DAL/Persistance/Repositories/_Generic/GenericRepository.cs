@@ -28,9 +28,9 @@ namespace IKEA.DAL.Persistance.Repositories._Generic
             return dbContext.Set<T>();
         }
 
-        public T? GetById(int id)
+        public async Task<T?> GetById(int id)
         {
-            var item = dbContext.Set<T>().Find(id);
+            var item = await dbContext.Set<T>().FindAsync(id);
 
             //var Employee= dbContext.Employees.Local.SingleOrDefault(E => E.Id==id);
 
@@ -39,24 +39,26 @@ namespace IKEA.DAL.Persistance.Repositories._Generic
 
             return item;
         }
-        public int Add(T item)
+        public void Add(T item)
         {
             dbContext.Set<T>().Add(item);
-            return dbContext.SaveChanges();
+          //  return dbContext.SaveChanges();
         }
-        public int Update(T item)
+        public void Update(T item)
         {
             dbContext.Set<T>().Update(item);
-            return dbContext.SaveChanges();
+          //  return dbContext.SaveChanges();
         }
 
-        public int Delete(T item)
+        public void Delete(T item)
         {
             item.IsDeleted = true;
             dbContext.Set<T>().Update(item);
-            return dbContext.SaveChanges();
+          //  return dbContext.SaveChanges();
         }
 
       
     }
+
+
 }
