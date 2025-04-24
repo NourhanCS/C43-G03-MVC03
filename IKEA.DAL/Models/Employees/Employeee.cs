@@ -37,6 +37,8 @@ namespace IKEA.DAL.Models.Employees
         //Navigational Prop [One]
         public virtual Department? Department { get; set; }
 
-        public string? ImageName { get; set; }  
+
+        public string? ImageName { get; set; }
+
     }
 }

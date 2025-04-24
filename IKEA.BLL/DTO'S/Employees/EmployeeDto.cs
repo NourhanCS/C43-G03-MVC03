@@ -24,7 +24,6 @@ namespace IKEA.BLL.DTO_S.Employees
         public string? Email { get; set; }
         public Gender Gender { get; set; } 
         public EmployeeType EmployeeType { get; set; } 
-
         public string? Department {  get; set; }
     }
 }

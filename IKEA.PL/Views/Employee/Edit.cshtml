@@ -6,8 +6,10 @@
 <div class="row justify-content-center align-content-center flex-column">
 
     <h1 class="col-6 my-4">Edit Employee @Model.Name.</h1>
-    <form asp-action="Edit" method="post" class="row col-6">
+    <form asp-action="Edit" method="post" class="row col-6" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly"></div>
+
+        <input hidden asp-for="ImageName"/>
 
         <partial name="Partials/_CreateEditPartial" model="@Model" />
       

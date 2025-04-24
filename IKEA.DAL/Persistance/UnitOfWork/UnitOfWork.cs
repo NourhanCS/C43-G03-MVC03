@@ -26,11 +26,12 @@ namespace IKEA.DAL.Persistance.UnitOfWork
 
         }
 
-        public int Complete()
-        {
-           
-          return dbContext.SaveChanges();
-            }
+
+        public async Task <int> Complete()
+        { 
+         return await dbContext.SaveChangesAsync();
+
+        
         }
     }
 
