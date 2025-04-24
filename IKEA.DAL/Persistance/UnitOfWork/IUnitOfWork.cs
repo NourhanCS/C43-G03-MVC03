@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace IKEA.DAL.Persistance.UnitOfWork
 {
+
     public interface IUnitOfWork 
+
+    public interface IUnitOfWork
+
     {
         public IDepartmentRepository DepartmentRepository { get; }
 
