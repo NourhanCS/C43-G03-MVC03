@@ -1,4 +1,5 @@
 ﻿using IKEA.DAL.Models;
+using System.Net;
 using System.Net.Mail;
 
 namespace IKEA.PL.Helpers
@@ -7,8 +8,10 @@ namespace IKEA.PL.Helpers
     {
         public static void SendEmail(Email email)
         {
-            //var Client = new SmtpClient("paft.net",222);
-            //Client.EnableSsl = true;
+            var Client = new SmtpClient("smtp.gmail.com", 587);
+            Client.EnableSsl = true;
+            Client.Credentials = new NetworkCredential("norhanmohmoud.2004@gmail.com","lbanwqtxuevpexgh"); //APP Password
+            Client.Send("norhanmohmoud.2004@gmail.com", email.To, email.Subject, email.Body);
 
         }
     }

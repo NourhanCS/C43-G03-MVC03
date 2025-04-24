@@ -45,7 +45,8 @@ namespace IKEA.PL
                     options.Lockout.AllowedForNewUsers = true;
                     options.Lockout.MaxFailedAccessAttempts = 5;
                     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(5);
-            }).AddEntityFrameworkStores<ApplicationDbContext>();
+            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
             builder.Services.AddAuthentication().AddCookie(options =>
             {
                 options.LoginPath = "/Account/LogIn";

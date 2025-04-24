@@ -152,6 +152,11 @@ namespace IKEA.PL.Controllers
         {
             return View();
         }
+
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
         #endregion
 
     }
